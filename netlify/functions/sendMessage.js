@@ -11,11 +11,14 @@ export const handler = async (event) => {
   }
 
   try {
-    // USE getStore() for persistent, site-wide storage
-    const store = getStore('messages');
-    const message = event.body;
+    // Explicitly use the environment variables to connect to the store
+    const store = getStore({
+      name: 'messages',
+      siteID: process.env.NETLIFY_SITE_ID,
+      token: process.env.NETLIFY_BLOBS_TOKEN,
+    });
     
-    // Save the raw message body to the blob store with a specific key
+    const message = event.body;
     await store.set('latest-message', message);
     
     return {

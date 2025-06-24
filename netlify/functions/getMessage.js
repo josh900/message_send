@@ -4,15 +4,18 @@ import { getStore } from '@netlify/blobs';
 
 export const handler = async () => {
   try {
-    // USE getStore() to read from the same persistent store
-    const store = getStore('messages');
+    // Explicitly use the environment variables to connect to the store
+    const store = getStore({
+      name: 'messages',
+      siteID: process.env.NETLIFY_SITE_ID,
+      token: process.env.NETLIFY_BLOBS_TOKEN,
+    });
     
-    // Retrieve the message by its key
     const message = await store.get('latest-message');
     
     return {
       statusCode: 200,
-      body: message || 'Waiting for the first message...', // Send a default message if empty
+      body: message || 'Waiting for the first message...',
     };
   } catch (error) {
     return {
