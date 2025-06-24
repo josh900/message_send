@@ -16,5 +16,8 @@
     "url": "https://github.com/josh900/message_send/issues"
   },
   "homepage": "https://github.com/josh900/message_send#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@netlify/blobs": "^10.0.1"
+  }
 }
