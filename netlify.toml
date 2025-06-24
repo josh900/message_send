@@ -1,0 +1,14 @@
+# netlify.toml
+
+[build]
+  functions = "netlify/functions/"
+
+[[redirects]]
+  from = "/api/send"
+  to = "/.netlify/functions/sendMessage"
+  status = 200 # Required for handling POST requests
+
+[[redirects]]
+  from = "/api/get"
+  to = "/.netlify/functions/getMessage"
+  status = 200
