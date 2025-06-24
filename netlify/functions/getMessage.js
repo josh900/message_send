@@ -1,10 +1,11 @@
 // netlify/functions/getMessage.js
 
-import { getDeployStore } from '@netlify/blobs';
+import { getStore } from '@netlify/blobs';
 
 export const handler = async () => {
   try {
-    const store = getDeployStore();
+    // USE getStore() to read from the same persistent store
+    const store = getStore('messages');
     
     // Retrieve the message by its key
     const message = await store.get('latest-message');

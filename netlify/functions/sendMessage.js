@@ -1,6 +1,6 @@
 // netlify/functions/sendMessage.js
 
-import { getDeployStore } from '@netlify/blobs';
+import { getStore } from '@netlify/blobs';
 
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -11,7 +11,8 @@ export const handler = async (event) => {
   }
 
   try {
-    const store = getDeployStore();
+    // USE getStore() for persistent, site-wide storage
+    const store = getStore('messages');
     const message = event.body;
     
     // Save the raw message body to the blob store with a specific key
